@@ -495,7 +495,16 @@ def home():
                     "K6 - Create"
                 )
                 print("Word file generated successfully")
-                doc.save("question_paper.docx")
+                buffer = io.BytesIO()
+                doc.save(buffer)
+                buffer.seek(0)
+
+                return send_file(
+                    buffer,
+                    as_attachment=True,
+                    download_name="Question_Paper.docx",
+                    mimetype="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                )
 
                     
             message = f"{len(df)} Questions Loaded Successfully"
