@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+
+generated/
+uploads/
+extracted_images/
+
+question_paper.docx
+
+.vscode/
+.idea/
+
+.DS_Store

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>QPG</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',filename='style.css')}}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>QUESTION PAPER GENERATOR</h1>
+
+<form
+id="qpgForm"
+
+method="POST"
+
+enctype="multipart/form-data">
+
+<div class="box">
+
+<label>Upload Excel</label>
+<p>{{ message }}</p>
+<input
+
+type="file"
+
+name="excel_file"
+
+required>
+
+<p>
+
+Excel Structure:
+
+A - Serial Number
+
+B - Question
+
+C - CO Type
+
+D - Knowledge Type
+
+E - Marks
+
+F - Part
+
+</p>
+
+</div>
+
+<input type="text" name="qp_code" placeholder="Question Paper Code" required>
+
+<input type="text" name="institution" placeholder="Institution Name" required>
+
+<input type="text" name="exam_name" placeholder="Examination Name" required>
+
+<input type="text" name="semester" placeholder="Semester" required>
+
+<input type="text" name="exam_no" placeholder="Examination Number" required>
+
+<input type="text" name="department" placeholder="Department" required>
+
+<input type="text" name="subject_code" placeholder="Subject Code" required>
+
+<input type="text" name="subject_name" placeholder="Subject Name" required>
+
+<input type="text" name="regulation" placeholder="Regulation" required>
+
+<input type="text" name="duration" placeholder="Duration" required>
+
+<input type="number" name="max_marks" placeholder="Max Marks" required>
+
+<div id="parts"></div>
+
+<button
+
+type="button"
+
+onclick="addPart()">
+
+ADD PART
+
+</button>
+<div id="parts_container">
+
+</div>
+
+<button
+
+type="submit">
+
+GENERATE
+
+</button>
+
+</form>
+
+</div>
+
+<script src="{{url_for('static',filename='script.js')}}"></script>
+<script>
+
+let count = 0;
+
+function addPart(){
+
+count++;
+
+const container =
+document.getElementById("parts_container");
+
+const section = document.createElement("div");
+
+section.innerHTML = `
+
+<hr>
+
+<h3>PART ${count}</h3>
+
+<input
+type="text"
+name="part_name[]"
+placeholder="Part Name"
+required>
+
+<br><br>
+
+<input
+type="number"
+name="part_marks[]"
+placeholder="Marks"
+required>
+
+<br><br>
+
+<input
+type="text"
+name="part_co[]"
+placeholder="CO Type (CO1)"
+required>
+
+<br><br>
+
+<input
+type="number"
+name="part_questions[]"
+placeholder="Number Of Questions"
+required>
+
+<br><br>
+
+<label>Part Description</label><br>
+
+<textarea
+name="part_description[]"
+rows="2"
+style="width:100%;"
+placeholder="Example: Answer ALL the questions. Each question carries 2 marks.">
+</textarea>
+<br><br>
+
+<select
+name="optional[]">
+
+<option value="NO">
+NO
+</option>
+
+<option value="YES">
+YES
+</option>
+
+</select>
+
+<br><br>
+
+`;
+
+container.appendChild(section);
+
+}
+
+</script>
+
+</body>
+
+</html>
